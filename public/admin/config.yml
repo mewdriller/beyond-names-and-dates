@@ -16,4 +16,4 @@ collections:
     label: "Post"
     name: "post"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-media_folder: static/img
+media_folder: img
