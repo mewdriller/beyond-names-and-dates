@@ -3,8 +3,8 @@ import Document, {
   Head,
   Html,
   Main,
-  NextScript
-} from "next/document";
+  NextScript,
+} from 'next/document';
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

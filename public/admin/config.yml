@@ -4,16 +4,16 @@ backend:
 collections:
   - create: true
     fields:
-      - { label: "Body", name: "body", required: true, width: "markdown" }
+      - { label: 'Body', name: 'body', required: true, width: 'markdown' }
       - {
-          label: "Publish Date",
-          name: "date",
+          label: 'Publish Date',
+          name: 'date',
           required: true,
-          widget: "datetime",
+          widget: 'datetime',
         }
-      - { label: "Title", name: "title", required: true, widget: "string" }
-    folder: "_content/posts"
-    label: "Post"
-    name: "post"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+      - { label: 'Title', name: 'title', required: true, widget: 'string' }
+    folder: '_content/posts'
+    label: 'Post'
+    name: 'post'
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
 media_folder: img
