@@ -11,7 +11,7 @@ collections:
           required: true,
           widget: 'datetime',
         }
-      - { label: 'Title', name: 'title', required: true, widget: 'string' }
+      - { label: 'Title', name: 'title', required: true, widget: 'string' },
     folder: '_content/posts'
     label: 'Post'
     name: 'post'

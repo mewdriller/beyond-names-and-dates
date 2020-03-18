@@ -1,7 +1,10 @@
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-});
+module.exports = {
+  webpack: configuration => {
+    configuration.module.rules.push({
+      test: /\.md?$/,
+      use: 'frontmatter-markdown-loader',
+    });
 
-module.exports = withMDX({
-  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
-});
+    return configuration;
+  },
+};
