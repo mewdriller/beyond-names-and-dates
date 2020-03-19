@@ -36,12 +36,12 @@ export const getStaticProps = async ({ params }) => {
   const mdxToHTML = require('../../mdx-to-html');
 
   const mdxText = fs.readFileSync(`./_content/posts/${params.slug}.md`, 'utf8');
-  const { excerpt, frontMatter, html } = await mdxToHTML(mdxText);
+  const { frontMatter, html } = await mdxToHTML(mdxText);
 
   return {
     props: {
       body: html,
-      excerpt,
+      excerpt: frontMatter.excerpt,
       publishedAt: frontMatter.date.toISOString(),
       title: frontMatter.title,
     },

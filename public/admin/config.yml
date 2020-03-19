@@ -4,13 +4,14 @@ backend:
 collections:
   - create: true
     fields:
-      - { label: 'Body', name: 'body', required: true, width: 'markdown' }
+      - { label: 'Body', name: 'body', required: true, widget: 'markdown' }
       - {
           label: 'Publish Date',
           name: 'date',
           required: true,
           widget: 'datetime',
         }
+      - { label: "Excerpt", name: 'excerpt', required: true, widget: 'string' }
       - { label: 'Title', name: 'title', required: true, widget: 'string' },
     folder: '_content/posts'
     label: 'Post'
