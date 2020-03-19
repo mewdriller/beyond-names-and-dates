@@ -14,6 +14,17 @@ class CustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <style jsx global>{`
+            * {
+              box-sizing: border-box;
+            }
+
+            body,
+            html {
+              margin: 0;
+              padding: 0;
+            }
+          `}</style>
         </body>
       </Html>
     );
