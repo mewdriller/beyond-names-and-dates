@@ -1,25 +1,14 @@
-import { mdx, MDXProvider } from '@mdx-js/react';
-import Head from 'next/head';
 import React from 'react';
 
-import MDXRenderer from '../../components/MDXRenderer';
+import { Layout } from '../../components';
 
-const Page = ({ body, date, title }) => {
+const Post = ({ body, excerpt, publishedAt, title }) => {
   return (
-    <MDXProvider components={{}}>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          content="Beyond Names and Dates"
-          key="description"
-          name="description"
-        />
-      </Head>
+    <Layout description={excerpt} title={title}>
       <article>
         <h1>{title}</h1>
-        <time dateTime={date}>{date}</time>
-        <MDXRenderer>{body}</MDXRenderer>
+        <time dateTime={publishedAt}>{publishedAt}</time>
+        <div dangerouslySetInnerHTML={{ __html: body }} />
         <style jsx>{`
           article {
             margin: 0 auto;
@@ -27,7 +16,7 @@ const Page = ({ body, date, title }) => {
           }
         `}</style>
       </article>
-    </MDXProvider>
+    </Layout>
   );
 };
 
@@ -43,19 +32,20 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { attributes, body } = await import(
-    `../../../_content/posts/${params.slug}.md`
-  ).then(module => module.default);
-  const { date, title } = attributes;
-  const jsx = await mdx(body, { skipExport: true });
-  const { code } = babel.transform(jsx, {
-    plugins: [
-      '@babel/plugin-transform-react-jsx',
-      '@babel/plugin-proposal-object-rest-spread',
-    ],
-  });
+  const fs = require('fs');
+  const mdxToHTML = require('../../mdx-to-html');
 
-  return { props: { body: code, date, title } };
+  const mdxText = fs.readFileSync(`./_content/posts/${params.slug}.md`, 'utf8');
+  const { excerpt, frontMatter, html } = await mdxToHTML(mdxText);
+
+  return {
+    props: {
+      body: html,
+      excerpt,
+      publishedAt: frontMatter.date.toISOString(),
+      title: frontMatter.title,
+    },
+  };
 };
 
-export default Page;
+export default Post;
